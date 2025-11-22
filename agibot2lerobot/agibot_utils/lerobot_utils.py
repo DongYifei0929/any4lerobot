@@ -14,6 +14,8 @@ def generate_features_from_config(AgiBotWorld_CONFIG):
         features[f"observation.states.{key}"] = value
     for key, value in AgiBotWorld_CONFIG["actions"].items():
         features[f"actions.{key}"] = value
+    for key, value in AgiBotWorld_CONFIG["eef"].items():
+        features[f"eef.{key}"] = value
     return features
 
 

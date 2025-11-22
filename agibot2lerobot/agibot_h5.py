@@ -1,3 +1,8 @@
+import sys, pathlib
+THIS_DIR = pathlib.Path(__file__).resolve().parent
+if str(THIS_DIR) not in sys.path:
+    sys.path.insert(0, str(THIS_DIR))
+
 import argparse
 import gc
 import shutil
@@ -217,7 +222,7 @@ class AgiBotDataset(LeRobotDataset):
 def get_all_tasks(src_path: Path, output_path: Path):
     json_files = src_path.glob("task_info/*.json")
     for json_file in json_files:
-        local_dir = output_path / "agibotworld" / json_file.stem
+        local_dir = output_path / json_file.stem
         yield (json_file, local_dir.resolve())
 
 
@@ -237,13 +242,13 @@ def save_as_lerobot_dataset(agibot_world_config, task: tuple[Path, Path], num_th
     if local_dir.exists():
         shutil.rmtree(local_dir)
 
-    if not save_depth:
-        features.pop("observation.images.head_depth")
+    # if not save_depth:
+    #     features.pop("observation.images.head_depth")
 
     dataset: AgiBotDataset = AgiBotDataset.create(
         repo_id=json_file.stem,
         root=local_dir,
-        fps=30,
+        fps=10,
         robot_type="a2d",
         features=features,
     )
@@ -269,9 +274,16 @@ def save_as_lerobot_dataset(agibot_world_config, task: tuple[Path, Path], num_th
             if not all([video_path.exists() for video_path in videos.values()]):
                 print(f"{json_file.stem}, episode_{eid}: some of the videos does not exist, skipping...")
                 continue
-
-            for frame_data in frames:
-                dataset.add_frame(frame_data, task_instruction)
+            
+            cur_subtask = 0
+            for timestamp, frame_data in enumerate(frames):
+                if timestamp < action_config[0]["start_frame"] or timestamp >= action_config[-1]["end_frame"]:
+                    frame_task_instruction = task_instruction
+                else:
+                    if timestamp >= action_config[cur_subtask]["end_frame"]:
+                        cur_subtask += 1
+                    frame_task_instruction = f"{task_instruction} | {action_config[cur_subtask]['action_text']}"
+                dataset.add_frame(frame_data, frame_task_instruction)
             try:
                 dataset.save_episode(videos=videos, action_config=action_config)
             except Exception as e:
@@ -304,8 +316,16 @@ def save_as_lerobot_dataset(agibot_world_config, task: tuple[Path, Path], num_th
                     print(f"{json_file.stem}, episode_{eid}: some of the videos does not exist, skipping...")
                     continue
                 action_config = task_info[eid]["label_info"]["action_config"]
-                for frame_data in frames:
-                    dataset.add_frame(frame_data, task_instruction)
+                
+                cur_subtask = 0
+                for timestamp, frame_data in enumerate(frames):
+                    if timestamp < action_config[0]["start_frame"] or timestamp >= action_config[-1]["end_frame"]:
+                        frame_task_instruction = task_instruction
+                    else:
+                        if timestamp >= action_config[cur_subtask]["end_frame"]:
+                            cur_subtask += 1
+                        frame_task_instruction = f"{task_instruction} | {action_config[cur_subtask]['action_text']}"
+                    dataset.add_frame(frame_data, frame_task_instruction)
                 try:
                     dataset.save_episode(videos=videos, action_config=action_config)
                 except Exception as e:

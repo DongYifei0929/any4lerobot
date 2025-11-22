@@ -81,6 +81,8 @@ def load_local_dataset(
                 )
                 for key, value in action.items()
             },
+            "eef.state": np.zeros((14,), dtype=np.float32),
+            "eef.action": np.zeros((14,), dtype=np.float32),
         }
         for i in range(num_frames)
     ]

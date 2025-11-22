@@ -5,46 +5,46 @@ AgiBotWorld_BETA_GRIPPER_CONFIG = {
             "shape": (480, 640, 3),
             "names": ["height", "width", "rgb"],
         },
-        "head_center_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "head_depth": {
-            "dtype": "image",
-            "shape": (480, 640, 1),
-            "names": ["height", "width", "channel"],
-        },
-        "head_left_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "head_right_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "hand_left": {
-            "dtype": "video",
-            "shape": (480, 640, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "hand_right": {
-            "dtype": "video",
-            "shape": (480, 640, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "back_left_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "back_right_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
+        # "head_center_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "head_depth": {
+        #     "dtype": "image",
+        #     "shape": (480, 640, 1),
+        #     "names": ["height", "width", "channel"],
+        # },
+        # "head_left_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "head_right_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "hand_left": {
+        #     "dtype": "video",
+        #     "shape": (480, 640, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "hand_right": {
+        #     "dtype": "video",
+        #     "shape": (480, 640, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "back_left_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "back_right_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
     },
     "states": {
         "effector.position": {
@@ -137,6 +137,52 @@ AgiBotWorld_BETA_GRIPPER_CONFIG = {
         "robot.velocity": {"dtype": "float32", "shape": (2,), "names": {"motors": ["x_vel", "yaw_vel"]}},
         "waist.position": {"dtype": "float32", "shape": (2,), "names": {"motors": ["pitch", "lift"]}},
     },
+    "eef": {
+        "state": {
+            "dtype": "float32",
+            "shape": (14,),
+            "names": {
+                "motors": [
+                    "left_x",
+                    "left_y",
+                    "left_z",
+                    "left_roll",
+                    "left_pitch",
+                    "left_yaw",
+                    "left_gripper",
+                    "right_x",
+                    "right_y",
+                    "right_z",
+                    "right_roll",
+                    "right_pitch",
+                    "right_yaw",
+                    "right_gripper",
+                ]
+            }
+        },
+        "action": {
+            "dtype": "float32",
+            "shape": (14,),
+            "names": {
+                "motors": [
+                    "left_x",
+                    "left_y",
+                    "left_z",
+                    "left_roll",
+                    "left_pitch",
+                    "left_yaw",
+                    "left_gripper",
+                    "right_x",
+                    "right_y",
+                    "right_z",
+                    "right_roll",
+                    "right_pitch",
+                    "right_yaw",
+                    "right_gripper",
+                ]
+            }
+        }
+    }
 }
 
 AgiBotWorld_BETA_DEXHAND_CONFIG = {
@@ -146,46 +192,46 @@ AgiBotWorld_BETA_DEXHAND_CONFIG = {
             "shape": (480, 640, 3),
             "names": ["height", "width", "rgb"],
         },
-        "head_center_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "head_depth": {
-            "dtype": "image",
-            "shape": (480, 640, 1),
-            "names": ["height", "width", "channel"],
-        },
-        "head_left_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "head_right_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "hand_left_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "hand_right_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "back_left_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "back_right_fisheye": {
-            "dtype": "video",
-            "shape": (748, 960, 3),
-            "names": ["height", "width", "rgb"],
-        },
+        # "head_center_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "head_depth": {
+        #     "dtype": "image",
+        #     "shape": (480, 640, 1),
+        #     "names": ["height", "width", "channel"],
+        # },
+        # "head_left_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "head_right_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "hand_left_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "hand_right_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "back_left_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
+        # "back_right_fisheye": {
+        #     "dtype": "video",
+        #     "shape": (768, 960, 3),
+        #     "names": ["height", "width", "rgb"],
+        # },
     },
     "states": {
         **AgiBotWorld_BETA_GRIPPER_CONFIG["states"],
@@ -237,29 +283,29 @@ AgiBotWorld_BETA_DEXHAND_CONFIG = {
 
 AgiBotWorld_BETA_TACTILE_CONFIG = {
     **AgiBotWorld_BETA_GRIPPER_CONFIG,
-    "images": {
-        **AgiBotWorld_BETA_GRIPPER_CONFIG["images"],
-        "left_sensor_1": {
-            "dtype": "video",
-            "shape": (700, 400, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "left_sensor_2": {
-            "dtype": "video",
-            "shape": (700, 400, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "right_sensor_1": {
-            "dtype": "video",
-            "shape": (700, 400, 3),
-            "names": ["height", "width", "rgb"],
-        },
-        "right_sensor_2": {
-            "dtype": "video",
-            "shape": (700, 400, 3),
-            "names": ["height", "width", "rgb"],
-        },
-    },
+    # "images": {
+    #     **AgiBotWorld_BETA_GRIPPER_CONFIG["images"],
+    #     "left_sensor_1": {
+    #         "dtype": "video",
+    #         "shape": (700, 400, 3),
+    #         "names": ["height", "width", "rgb"],
+    #     },
+    #     "left_sensor_2": {
+    #         "dtype": "video",
+    #         "shape": (700, 400, 3),
+    #         "names": ["height", "width", "rgb"],
+    #     },
+    #     "right_sensor_1": {
+    #         "dtype": "video",
+    #         "shape": (700, 400, 3),
+    #         "names": ["height", "width", "rgb"],
+    #     },
+    #     "right_sensor_2": {
+    #         "dtype": "video",
+    #         "shape": (700, 400, 3),
+    #         "names": ["height", "width", "rgb"],
+    #     },
+    # },
 }
 
 # Task statistics coming from https://docs.google.com/spreadsheets/d/1GWMFHYo3UJADS7kkScoJ5ObbQfAFasPuaeC7TJUr1Cc/edit?gid=0#gid=0
